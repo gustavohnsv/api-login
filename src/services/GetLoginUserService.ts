@@ -17,7 +17,8 @@ class GetLoginUserService {
                 name: true,
                 email: true,
                 create_at: true,
-                update_at: true
+                update_at: true,
+                photoID: true,
             }
         });
         return user;

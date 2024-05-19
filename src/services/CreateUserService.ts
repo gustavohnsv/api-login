@@ -5,10 +5,11 @@ interface CreateUserProps {
     name: string;
     email: string;
     password: string;
+    photoID: number;
 }
 
 class CreateUserService {
-    async execute({ name, email, password}: CreateUserProps) {
+    async execute({ name, email, password, photoID}: CreateUserProps) {
         if (!name || !email || !password) {
             throw new Error("Informações faltando!");
         }
@@ -16,9 +17,10 @@ class CreateUserService {
         const { hashedPassword } = await cryptService.execute({ password });
         const user = await prismaClient.users.create({
             data: {
-                name,
                 email,
-                password: hashedPassword
+                password: hashedPassword,
+                name,
+                photoID
             }
         });
         return user;
